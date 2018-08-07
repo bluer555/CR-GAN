@@ -4,7 +4,7 @@ Training code for the paper
 **[CR-GAN: Learning Complete Representations for Multi-view Generation](https://arxiv.org/abs/1806.11191.pdf)**, IJCAI 2018
 
 ## Overview
-Computer Vision methods use ``Encoder-Generator-Discriminator''
+"Encoder-Generator-Discriminator" to 
 <p align="center"><img src="intro.png" alt="Two pathway framework" width="400"></p>
 
 ### Prerequisites
