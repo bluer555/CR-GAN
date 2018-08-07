@@ -17,3 +17,5 @@ This package has the following requirements:
 * `Pytorch 0.3.1`
 
 ![](figures/face_rotation.gif)
+
+![](figures/face_attribute.gif)
