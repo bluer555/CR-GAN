@@ -16,6 +16,16 @@ This package has the following requirements:
 * `Python 2.7`
 * `Pytorch 0.3.1`
 
+
+## Training
+
+python train.py
+
+## Results
+Face rotation:
+
 ![](figures/face_rotation.gif)
+
+Face attribute manipulation:
 
 ![](figures/face_attribute.gif)
