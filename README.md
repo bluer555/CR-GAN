@@ -16,6 +16,12 @@ This package has the following requirements:
 * `Python 2.7`
 * `Pytorch 0.3.1`
 
+## Dataset
+
+Multi-PIE dataset webpage: http://www.cs.cmu.edu/afs/cs/project/PIE/MultiPie/Multi-Pie/Home.html
+Our cropped version can be downloaded at: https://drive.google.com/open?id=1QxNCh6vfNSZkod1Rg_zHLI1FM8WyXix4
+
+300w-LP dataset webpage: 
 
 ## Training
 
