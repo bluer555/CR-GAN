@@ -19,9 +19,19 @@ This package has the following requirements:
 ## Dataset
 
 Multi-PIE dataset webpage: http://www.cs.cmu.edu/afs/cs/project/PIE/MultiPie/Multi-Pie/Home.html
+
 Our cropped version can be downloaded at: https://drive.google.com/open?id=1QxNCh6vfNSZkod1Rg_zHLI1FM8WyXix4
 
-300w-LP dataset webpage: 
+300w-LP dataset webpage: http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm
+
+Our cropped version can be downloaded at: https://drive.google.com/open?id=1DD6AO9Y5rAgiiW7IJY2kBxI_bCcfhYo4
+
+Please cite the papers if using those dataset:
+
+Multi-PIE: Ralph  Gross,   Iain  Matthews,   JeffreyCohn, Takeo Kanade, and Simon Baker. Multi-pie.ImageVision Computer, 28(5):807–813, 2010.
+
+300w-LP: X. Zhu, Z. Lei, X. Liu, H. Shi, and S.Z. Li.Face Alignment Across Large Poses:  A 3D Solution.  In CVPR, 2016.
+
 
 ## Training
 
