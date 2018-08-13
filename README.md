@@ -28,9 +28,9 @@ Our cropped version can be downloaded at: https://drive.google.com/open?id=1DD6A
 
 Please cite the papers if using those dataset:
 
-Multi-PIE: Ralph  Gross,   Iain  Matthews,   JeffreyCohn, Takeo Kanade, and Simon Baker. Multi-pie.ImageVision Computer, 28(5):807–813, 2010.
+(Multi-PIE) Ralph  Gross,   Iain  Matthews,   JeffreyCohn, Takeo Kanade, and Simon Baker. Multi-pie.ImageVision Computer, 28(5):807–813, 2010.
 
-300w-LP: X. Zhu, Z. Lei, X. Liu, H. Shi, and S.Z. Li.Face Alignment Across Large Poses:  A 3D Solution.  In CVPR, 2016.
+(300w-LP) X. Zhu, Z. Lei, X. Liu, H. Shi, and S.Z. Li.Face Alignment Across Large Poses:  A 3D Solution.  In CVPR, 2016.
 
 
 ## Training
