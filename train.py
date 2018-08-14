@@ -138,9 +138,9 @@ crossEntropyLoss = nn.CrossEntropyLoss().cuda()
 for epoch in range(args.epochs):
     for i, (view1, view2, data1, data2) in enumerate(train_loader):
         # our framework:
-        # path 1: (v, z)-->G_vzx-->x_bar--> D_vx( (v,x_bar), (v,x) )
-        # This path to make sure G_vzx can generate good quality images, and make view decoupled
-        # path 2: x-->G_xvz-->(v_bar, z_bar)-->G_vzx-->x_bar_bar--> D_x(x_bar_bar, x) + L1_loss(x_bar_bar, x)
+        # path 1: (v, z)-->G_vzx-->x_bar--> D_xvs( (v,x_bar), (v,x) )
+        # This path to make sure G_vzx can generate good quality images with any random input
+        # path 2: x-->G_xvz-->(v_bar, z_bar)-->G_vzx-->x_bar_bar--> D_xvs( (v,x_bar_bar), (v,x) ) + L1_loss(x_bar_bar, x)
         # This path to make sure G_xvz is the reverse of G_vzx
         eps = random.uniform(0, 1)
         tmp = random.uniform(0, 1)
@@ -179,8 +179,8 @@ for epoch in range(args.epochs):
         tmp = torch.LongTensor(idxs)
         vv2 = Variable(tmp).cuda() # v2 target
         
-        ## path 1: (v, z)-->G_vzx-->x_bar--> D_vx( (v,x_bar), (v,x_real) )
-        # path 1, update D_vx
+        ## path 1: (v, z)-->G_vzx-->x_bar--> D_xvs( (v,x_bar), (v,x_real) )
+        # path 1, update D_xvs
         x_bar = G_vzx(v1, z) # random z to generate img x_bar
 
         x_hat = eps*x1.data + (1-eps)*x_bar.data # interpolation of x_bar and x1
@@ -222,7 +222,7 @@ for epoch in range(args.epochs):
         g_vzx_loss.backward()
         G_vzx_solver.step()
 
-        ## path 2: x-->G_xvz-->(v_bar, z_bar)-->G_vzx-->x_bar_bar--> D_x(x_bar_bar, x) + L1_loss(x_bar_bar, x)
+        ## path 2: x-->G_xvz-->(v_bar, z_bar)-->G_vzx-->x_bar_bar--> D_xvs( (v,x_bar_bar), (v,x) ) + L1_loss(x_bar_bar, x)
         # path 2, update D_x
         D_xvs.zero_grad()
         G_xvz.zero_grad()
@@ -231,7 +231,7 @@ for epoch in range(args.epochs):
         if reconstruct_fake is True:
             v_bar, z_bar = G_xvz(x_bar.detach())
             x_bar_bar = G_vzx(v1, z_bar)
-            x_hat = eps*x1.data + (1-eps)*x_bar_bar.data # interpolation of x2 and x_bar_bar
+            x_hat = eps*x1.data + (1-eps)*x_bar_bar.data # interpolation of x1 and x_bar_bar
         else:
             v_bar, z_bar = G_xvz(x1) # view invariant part of x1 
             x_bar_bar = G_vzx(v2, z_bar) # x_bar_bar: reconstruction of x2
@@ -249,7 +249,7 @@ for epoch in range(args.epochs):
         grad_norm = grads.pow(2).sum().sqrt()
         gp_loss = torch.mean((grad_norm - 1) ** 2)
         
-        x_loss_v, x_loss_s = D_xvs(x2) # try x2 here, x1 score, may try x2
+        x_loss_v, x_loss_s = D_xvs(x2)
         x_loss_s = x_loss_s.mean()
         x_bar_bar_loss_v, x_bar_bar_loss_s = D_xvs(x_bar_bar.detach()) # x_bar_bar score
         x_bar_bar_loss_s = x_bar_bar_loss_s.mean()
@@ -262,11 +262,11 @@ for epoch in range(args.epochs):
 
         # 2st path, update G_xvz
         x_bar_bar_loss_v, x_bar_bar_loss_s = D_xvs(x_bar_bar) # x_bar_bar score
-        x_bar_bar_loss_s = x_bar_bar_loss_s.mean() #
+        x_bar_bar_loss_s = x_bar_bar_loss_s.mean()
         
         if reconstruct_fake is True:
             x_l1_loss = L1_loss(x_bar_bar, x_bar.detach())
-            v_loss_x_bar_bar = crossEntropyLoss(x_bar_bar_loss_v, vv1) # ACGAN loss of x_bar_bar(v2)
+            v_loss_x_bar_bar = crossEntropyLoss(x_bar_bar_loss_v, vv1) # ACGAN loss of x_bar_bar(v1)
         else:
             x_l1_loss = L1_loss(x_bar_bar, x2) # L1 loss between x_bar_bar and x2
             v_loss_x_bar_bar = crossEntropyLoss(x_bar_bar_loss_v, vv2) # ACGAN loss of x_bar_bar(v2)
@@ -295,7 +295,7 @@ for epoch in range(args.epochs):
             vutils.save_image(x2.data,
                     '%s/x2_epoch_%03d_%04d.png' % (args.outf, epoch, i),normalize=True)
 
-            torch.save(G_xvz.state_dict(), '%s/netG_xvz_epoch_%d_%d.pth' % (args.outf, epoch+25, i))
-            torch.save(G_vzx.state_dict(), '%s/netG_vzx_epoch_%d_%d.pth' % (args.outf, epoch+25, i))
-            torch.save(D_xvs.state_dict(), '%s/netD_xvs_epoch_%d_%d.pth' % (args.outf, epoch+25, i))
+            torch.save(G_xvz.state_dict(), '%s/netG_xvz_epoch_%d_%d.pth' % (args.outf, epoch, i))
+            torch.save(G_vzx.state_dict(), '%s/netG_vzx_epoch_%d_%d.pth' % (args.outf, epoch, i))
+            torch.save(D_xvs.state_dict(), '%s/netD_xvs_epoch_%d_%d.pth' % (args.outf, epoch, i))
 
