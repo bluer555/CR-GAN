@@ -45,7 +45,7 @@ https://drive.google.com/open?id=1J3VffWKe8akdiNM2hy7NI3lY4xM_xL-c
 
 Run test images:
 
-evaluate.py
+python evaluate.py
 
 ## Results
 Face rotation:
