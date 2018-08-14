@@ -37,6 +37,16 @@ Please cite the papers if using those dataset:
 
 python train.py
 
+## Pre-trained model
+
+Pre-trained model can be downloaded here:
+
+https://drive.google.com/open?id=1J3VffWKe8akdiNM2hy7NI3lY4xM_xL-c
+
+Run test images:
+
+evaluate.py
+
 ## Results
 Face rotation:
 
