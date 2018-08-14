@@ -1,0 +1,3 @@
+test_data/139099_128.jpg
+test_data/080004_128.jpg
+test_data/116669_128.jpg
