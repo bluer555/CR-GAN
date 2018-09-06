@@ -59,3 +59,15 @@ Face rotation:
 Face attribute manipulation:
 
 ![](figures/face_attribute.gif)
+
+## Citation
+If you find this code useful in your research, please consider citing:
+
+```
+@article{tian2018cr,
+  title={Cr-gan: Learning complete representations for multi-view generation},
+  author={Tian, Yu and Peng, Xi and Zhao, Long and Zhang, Shaoting and Metaxas, Dimitris N},
+  journal={arXiv preprint arXiv:1806.11191},
+  year={2018}
+}
+```
