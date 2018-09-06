@@ -28,6 +28,8 @@ Our cropped version can be downloaded at: https://drive.google.com/open?id=1QxNC
 
 Our cropped version can be downloaded at: https://drive.google.com/open?id=1DD6AO9Y5rAgiiW7IJY2kBxI_bCcfhYo4
 
+For 300w-LP dataset, data_loader.py need additional text files to get the view label, text files can be downloaded here: https://drive.google.com/open?id=1TIfcpn4N3rgGlzWl0lXNZKhy7XWVWOoA
+
 Please cite the papers if using those dataset:
 
 (Multi-PIE) Ralph  Gross,   Iain  Matthews,   JeffreyCohn, Takeo Kanade, and Simon Baker. Multi-pie.ImageVision Computer, 28(5):807–813, 2010.
